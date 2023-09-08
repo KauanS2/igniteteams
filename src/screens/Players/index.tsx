@@ -4,16 +4,25 @@ import { Filter } from "@components/Filter";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
+import { useRoute } from '@react-navigation/native'
 import { ListEmpty } from "@components/ListEmpty";
 import { PlayerCard } from "@components/PlayerCard";
 import { Container, Form, HeaderList, NumberOfPlayers } from "@screens/Players/styles";
 import { useState } from "react";
 import { FlatList } from "react-native";
 
+interface RouteParamsProps {
+    group: string
+}
+
 export function Players() {
 
     const [team, setTeams] = useState('Turma A')
     const [players, setPlayers] = useState<string[]>(['Kauan'])
+
+    const route = useRoute()
+
+    const { group } = route.params as RouteParamsProps
 
     function handlePlayersRemove() {
         
@@ -21,7 +30,7 @@ export function Players() {
     return (
         <Container>
             <Header showBackButton />
-            <Highlight title="Nome da turma" subtitle="adicione a galera e separe os times" />
+            <Highlight title={group} subtitle="adicione a galera e separe os times" />
             <Form>
                 <Input placeholder="Nome da pessoa" autoCorrect={false} />
                 <ButtonIcon icon="add" />
