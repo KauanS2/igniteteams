@@ -1,5 +1,6 @@
-import { TouchableOpacityProps } from 'react-native'
 import { Container, Icon, Title } from "@components/GroupCard/styles";
+
+import { TouchableOpacityProps } from 'react-native'
 interface GroupCardProps extends TouchableOpacityProps {
     title: string
 }

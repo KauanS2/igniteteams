@@ -1,5 +1,7 @@
 import { BackButton, BackIcon, Container, Logo } from "@components/Header/styles";
+
 import logoImg from '@assets/logo.png'
+
 import { useNavigation } from '@react-navigation/native'
 
 interface HeaderProps {

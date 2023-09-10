@@ -1,4 +1,5 @@
 import { Container, FilterStyleProps, Title } from '@components/Filter/styles';
+
 import { TouchableOpacityProps } from 'react-native'
 interface FilterProps extends TouchableOpacityProps, FilterStyleProps {
     title: string;

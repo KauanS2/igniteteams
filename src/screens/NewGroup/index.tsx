@@ -1,13 +1,18 @@
-import { useState } from 'react'
 import { Button } from "@components/Button";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
+
 import { useNavigation } from '@react-navigation/native'
+
 import { Container, Content, Icon } from "@screens/NewGroup/styles";
+
 import { groupCreate } from '@storage/group/groupCreate';
+
 import { AppError } from '@utils/AppError';
+
 import { Alert } from 'react-native'
+import { useState } from 'react'
 
 export function NewGroup() {
 

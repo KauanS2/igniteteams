@@ -1,5 +1,7 @@
 import { Container } from "@components/Input/styles";
+
 import { TextInputProps, TextInput } from "react-native";
+
 import { useTheme } from "styled-components/native";
 
 interface InputProps extends TextInputProps {
