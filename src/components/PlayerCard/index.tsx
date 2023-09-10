@@ -11,7 +11,11 @@ export function PlayerCard({name, onRemove}: PlayerCardProps) {
         <Container>
             <Icon name='person' />
             <Name>{name}</Name>
-            <ButtonIcon icon="close" type="SECONDARY" onPress={onRemove}/>
+            <ButtonIcon
+                icon="close"
+                type="SECONDARY"
+                onPress={onRemove}
+            />
         </Container>
     )
 }

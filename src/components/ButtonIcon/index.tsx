@@ -9,7 +9,10 @@ interface ButtonIconProps extends TouchableOpacityProps {
 export function ButtonIcon({icon, type = 'PRIMARY', ...rest}: ButtonIconProps) {
     return (
         <Container {...rest}>
-            <Icon name={icon} type={type} />
+            <Icon
+                name={icon}
+                type={type}
+            />
         </Container>
     )
 }

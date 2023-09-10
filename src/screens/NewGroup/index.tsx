@@ -36,9 +36,16 @@ export function NewGroup() {
             <Header showBackButton />
             <Content>
                 <Icon />
-                <Highlight title="Nova Turma" subtitle="crie a turma para adicionar novas pessoas" />
-                <Input placeholder="Nova turma" onChangeText={setGroup} />
-                <Button style={{marginTop: 20}} title="Criar" onPress={handleNew}/>
+                <Highlight
+                    title="Nova Turma"
+                    subtitle="crie a turma para adicionar novas pessoas" />
+                <Input
+                    placeholder="Nova turma"
+                    onChangeText={setGroup} />
+                <Button
+                    style={{ marginTop: 20 }}
+                    title="Criar"
+                    onPress={handleNew} />
             </Content>
         </Container>
     )

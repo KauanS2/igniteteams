@@ -8,11 +8,10 @@ import { useRoute } from '@react-navigation/native'
 import { ListEmpty } from "@components/ListEmpty";
 import { PlayerCard } from "@components/PlayerCard";
 import { Container, Form, HeaderList, NumberOfPlayers } from "@screens/Players/styles";
-import { useEffect, useState } from "react";
-import { FlatList, Alert } from "react-native";
+import { useEffect, useState, useRef } from "react";
+import { FlatList, Alert, TextInput } from "react-native";
 import { AppError } from "@utils/AppError";
 import { playerAddByGroups } from "@storage/player/playerAddByGroups";
-import { playersGetByGroup } from "@storage/player/playersGetByGroup";
 import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam'
 import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
 
@@ -26,6 +25,8 @@ export function Players() {
     const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
 
     const route = useRoute()
+
+    const newPlayerNameInputRef = useRef<TextInput>(null);
 
     const { group } = route.params as RouteParamsProps
 
@@ -43,6 +44,9 @@ export function Players() {
         }
         try {
             await playerAddByGroups(newPlayer, group)
+
+            newPlayerNameInputRef.current?.blur()
+            setNewPlayerName('')
             fetchPlayersByTeam();
         } catch (err) {
             if (err instanceof AppError) {
@@ -71,8 +75,17 @@ export function Players() {
             <Header showBackButton />
             <Highlight title={group} subtitle="adicione a galera e separe os times" />
             <Form>
-                <Input placeholder="Nome da pessoa" autoCorrect={false} onChangeText={setNewPlayerName} />
-                <ButtonIcon icon="add" onPress={handlePlayersAdd} />
+                <Input
+                    inputRef={newPlayerNameInputRef}
+                    placeholder="Nome da pessoa"
+                    autoCorrect={false} onChangeText={setNewPlayerName}
+                    value={newPlayerName}
+                    onSubmitEditing={handlePlayersAdd}
+                    returnKeyType="done"
+                />
+                <ButtonIcon
+                    icon="add"
+                    onPress={handlePlayersAdd} />
 
             </Form>
 
@@ -81,7 +94,12 @@ export function Players() {
                 data={['Turma A', 'Turma B']}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <Filter title={item} isActive={team === item} onPress={() => setTeams(item)} />
+                    <Filter
+                        title={item}
+                        isActive={team === item}
+                        onPress={() =>
+                            setTeams(item)}
+                    />
                 )}
                 horizontal
                 />
@@ -93,7 +111,9 @@ export function Players() {
                 data={players}
                 keyExtractor={item => item.name}
                 renderItem={({ item }) => (
-                    <PlayerCard name={item.name} onRemove={handlePlayersRemove}/>
+                    <PlayerCard
+                        name={item.name}
+                        onRemove={handlePlayersRemove} />
                 )}
                 ListEmptyComponent={() => (
                     <ListEmpty message="Não há pessoas nesse time."/>
@@ -104,7 +124,9 @@ export function Players() {
                     players.length === 0 && { flex: 1}
                 ]}
             />
-            <Button title="Remover turma" type="SECONDARY"/>
+            <Button
+                title="Remover turma"
+                type="SECONDARY" />
             
         </Container>
     )
